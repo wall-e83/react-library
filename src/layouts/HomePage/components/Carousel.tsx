@@ -1,4 +1,41 @@
+import { useEffect, useState } from "react";
+import Books from "../../../Model/Books";
+import { SpinnerLoading } from "../../Utils/SpinnerLoading";
+import { ReturnBook } from "./ReturnBook";
+    const url: string = "http://localhost:8080/apibook/books";
+
 export const Carousel = () => {
+    const [dataBooks, setDataBooks] = useState<Books[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [httpError, setHttpError] = useState(null);
+
+    useEffect( () => {
+        const fetchData = async() => {
+            const data = await fetch(url);
+            const json = await data.json();
+            setDataBooks(json._embedded.books);
+            setIsLoading(false);
+        } 
+        fetchData().catch((error: any) => {
+            
+            setHttpError(error.message);
+        })
+    },[isLoading]);
+
+    if (isLoading) {
+        return (
+            <SpinnerLoading />
+        )
+    }
+
+    if (httpError) {
+        return (
+            <div className='container m-5'>
+                <p>{httpError}</p>
+            </div>
+        )
+    }
+
     return (
         <div className='container mt-5' style={{ height: 550 }}>
             <div className='homepage-carousel-title'>
@@ -9,59 +46,19 @@ export const Carousel = () => {
 
                 {/* Desktop */}
                 <div className='carousel-inner'>
-                    <div className='carousel-item active'>
-                        <div className='row d-flex justify-content-center align-items-center'>
-                            <div className='col-xs-6 col-sm-6 col-md-4 col-lg-3 mb-3'>
-                                <div className='text-center'>
-                                    <img
-                                        src={require('../../../Images/BooksImages/book-luv2code-1000.png')}
-                                        //src="#"
-                                        width='151'
-                                        height='233'
-                                        alt="book"
-                                    />
-                                    <h6 className='mt-2'>Book</h6>
-                                    <p>Luv2Code</p>
-                                    <a className='btn main-color text-white' href='#'>Reserve</a>
-                                </div>
+                {
+
+                    dataBooks.map((singleBook,index)=>(
+                        <div className={"carousel-item " + (index === 0 ? 'active' : '')} key={index}>
+                            <div className='row d-flex justify-content-center align-items-center'>
+                                <ReturnBook singleBook={singleBook} />
                             </div>
                         </div>
-                    </div>
-                    <div className='carousel-item'>
-                        <div className='row d-flex justify-content-center align-items-center'>
-                            <div className='col-xs-6 col-sm-6 col-md-4 col-lg-3 mb-3'>
-                                <div className='text-center'>
-                                    <img
-                                        src={require('../../../Images/BooksImages/book-luv2code-1000.png')}
-                                        //src="#"
-                                        width='151'
-                                        height='233'
-                                        alt="book"
-                                    />
-                                    <h6 className='mt-2'>Book</h6>
-                                    <p>Luv2Code</p>
-                                    <a className='btn main-color text-white' href='#'>Reserve</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='carousel-item'>
-                        <div className='row d-flex justify-content-center align-items-center'>
-                            <div className='col-xs-6 col-sm-6 col-md-4 col-lg-3 mb-3'>
-                                <div className='text-center'>
-                                    <img
-                                         src={require('../../../Images/BooksImages/book-luv2code-1000.png')}
-                                        width='151'
-                                        height='233'
-                                        alt="book"
-                                    />
-                                    <h6 className='mt-2'>Book</h6>
-                                    <p>Luv2Code</p>
-                                    <a className='btn main-color text-white' href='#'>Reserve</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    ))
+                }
+                    
+                    
+
                     <button className='carousel-control-prev' type='button'
                         data-bs-target='#carouselExampleControls' data-bs-slide='prev'>
                         <span className='carousel-control-prev-icon' aria-hidden='true'></span>
