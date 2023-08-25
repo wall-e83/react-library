@@ -10,7 +10,7 @@ export const Heros = () => {
                         <div className='ml-2'>
                             <h1>What have you been reading?</h1>
                             <p className='lead'>
-                                The library team would love to know what you have been reading.
+                                The library x team would love to know what you have been reading.
                                 Whether it is to learn a new skill or grow within one,
                                 we will be able to provide the top content for you!
                             </p>
