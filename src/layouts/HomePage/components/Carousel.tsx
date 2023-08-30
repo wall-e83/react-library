@@ -1,26 +1,31 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Books from "../../../Model/Books";
 import { SpinnerLoading } from "../../Utils/SpinnerLoading";
+import { useFetch } from "../../../hook/useFetch";
 import { ReturnBook } from "./ReturnBook";
-    const url: string = "http://localhost:8080/apibook/books";
+const url: string = "http://localhost:8080/apibook/books";
+
 
 export const Carousel = () => {
-    const [dataBooks, setDataBooks] = useState<Books[]>([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [httpError, setHttpError] = useState(null);
+      //const [dataBooks, setDataBooks] = useState<Books[]>([]);
+    //  setDataBooks(useFetch(url));
+    const { dataBooks, isLoading, httpError } = useFetch(url);
+    // const [isLoading, setIsLoading] = useState(true);
+    // const [httpError, setHttpError] = useState(null);
 
-    useEffect( () => {
-        const fetchData = async() => {
-            const data = await fetch(url);
-            const json = await data.json();
-            setDataBooks(json._embedded.books);
-            setIsLoading(false);
-        } 
-        fetchData().catch((error: any) => {
-            
-            setHttpError(error.message);
-        })
-    },[isLoading]);
+    // useEffect( () => {
+    //     const fetchData = async() => {
+    //         const data = await fetch(url);
+    //         const json = await data.json();
+    //         setDataBooks(json._embedded.books);
+    //         setIsLoading(false);
+    //     } 
+    //     fetchData().catch((error: any) => {
+
+    //         setHttpError(error.message);
+    //     })
+    // },[]);
+
 
     if (isLoading) {
         return (
@@ -46,18 +51,18 @@ export const Carousel = () => {
 
                 {/* Desktop */}
                 <div className='carousel-inner'>
-                {
+                    {
 
-                    dataBooks.map((singleBook,index)=>(
-                        <div className={"carousel-item " + (index === 0 ? 'active' : '')} key={index}>
-                            <div className='row d-flex justify-content-center align-items-center'>
-                                <ReturnBook singleBook={singleBook} />
+                        dataBooks.map((singleBook, index) => (
+                            <div className={"carousel-item " + (index === 0 ? 'active' : '')} key={index}>
+                                <div className='row d-flex justify-content-center align-items-center'>
+                                    <ReturnBook singleBook={singleBook} />
+                                </div>
                             </div>
-                        </div>
-                    ))
-                }
-                    
-                    
+                        ))
+                    }
+
+
 
                     <button className='carousel-control-prev' type='button'
                         data-bs-target='#carouselExampleControls' data-bs-slide='prev'>
@@ -77,7 +82,7 @@ export const Carousel = () => {
                 <div className='row d-flex justify-content-center align-items-center'>
                     <div className='text-center'>
                         <img
-                             src={require('../../../Images/BooksImages/book-luv2code-1000.png')}
+                            src={require('../../../Images/BooksImages/book-luv2code-1000.png')}
                             width='151'
                             height='233'
                             alt="book"
