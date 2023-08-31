@@ -5,7 +5,6 @@ import { useFetch } from "../../../hook/useFetch";
 import { ReturnBook } from "./ReturnBook";
 import  { datajson }   from "../../../data/data";
 const url: string = "http://localhost:8080/apibook/books";
-//const url: string = "http://localhost:8888/react/data";
 
 export const Carousel = () => {
     // const [dataBooks, setDataBooks] = useState<Books[]>([]);
