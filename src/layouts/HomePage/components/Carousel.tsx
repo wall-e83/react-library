@@ -44,7 +44,7 @@ export const Carousel = () => {
     // }
     // FINE DINAMICO
 
-    const dataBooks = datajson._embedded.books;
+    const {books: dataBooks} = datajson._embedded;
     return (
         <div className='container mt-5' style={{ height: 550 }}>
             <div className='homepage-carousel-title'>
