@@ -1,5 +1,5 @@
 class Books{
-
+     id: number;
      title: string;
      author: string;
      description: string;
@@ -8,7 +8,8 @@ class Books{
      category: string;
      img: string;
 
-    constructor (title: string, author: string, description: string, copies: number, copiesAvailable: number, category: string, img: string){
+    constructor (id:number, title: string, author: string, description: string, copies: number, copiesAvailable: number, category: string, img: string){
+        this.id = id;
         this.title = title;
         this.author = author;
         this.description = description;

@@ -7,27 +7,27 @@ import { ReturnBook } from "./ReturnBook";
 const url: string = "http://localhost:8080/apibook/books";
 
 export const Carousel = () => {
-    // const [dataBooks, setDataBooks] = useState<Books[]>([]);
-    // const [isLoading, setIsLoading] = useState(true);
-    // const [httpError, setHttpError] = useState(null);
+    const [dataBooks, setDataBooks] = useState<Books[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [httpError, setHttpError] = useState(null);
  
-    // useEffect( () => {
-    //     console.log("entro");
-    //     const fetchData = async() => {
-    //         const data = await fetch(url); // prima era url
-    //         const json = await data.json();
-    //         console.log(json);
-    //         setDataBooks(json._embedded.books);
-    //         setIsLoading(false);
-    //     } 
-    //     fetchData().catch((error: any) => {
+    useEffect( () => {
+        console.log("entro");
+        const fetchData = async() => {
+            const data = await fetch(url); // prima era url
+            const json = await data.json();
+            console.log(json);
+            setDataBooks(json._embedded.books);
+            setIsLoading(false);
+        } 
+        fetchData().catch((error: any) => {
 
-    //         setHttpError(error.message);
-    //     })
-    // },[]);
+            setHttpError(error.message);
+        })
+    },[]);
 
     // DINAMICO 
-    const { dataBooks, isLoading, httpError } = useFetch(url);
+    //const { dataBooks, isLoading, httpError } = useFetch(url);
     if (isLoading) {
         return (
             <SpinnerLoading />

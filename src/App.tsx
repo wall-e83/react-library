@@ -4,7 +4,7 @@ import { Navbar } from './layouts/NavBarAndFooter/Navbar';
 import { Footer } from './layouts/NavBarAndFooter/Footer';
 import { HomePage } from './layouts/HomePage/HomePage';
 import { Route, Switch } from 'react-router-dom';
-import { Heros } from './layouts/HomePage/components/Heros';
+import { SearchBooksPage } from './layouts/SearchBooksPage/SearchBooksPage';
 function App() {
   return (
     <>
@@ -14,7 +14,7 @@ function App() {
             <HomePage />
          </Route>
           <Route path="/search">
-            <Heros />
+            <SearchBooksPage />
           </Route>
         </Switch>       
         <Footer />
