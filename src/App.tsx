@@ -6,7 +6,7 @@ import { HomePage } from './layouts/HomePage/HomePage';
 import { Route, Switch , useHistory} from 'react-router-dom';
 import { SearchBooksPage } from './layouts/SearchBooksPage/SearchBooksPage';
 import { oktaConfig } from './lib/oktaConfig';
-import { OktaAuth } from '@okta/okta-auth-js';
+import { OktaAuth, toRelativeUrl } from '@okta/okta-auth-js';
 
 const oktaAuth = new OktaAuth(oktaConfig);
 
@@ -17,7 +17,11 @@ function App() {
   }
 
   const history = useHistory();
-  
+
+  const restoreOriginalUri = async(_oktaAuth: any, originalUri: any) => {
+    history.replace(toRelativeUrl(originalUri || '/', window.location.origin));  
+  }
+
   return (
     <>
         <Navbar />
