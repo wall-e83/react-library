@@ -3,47 +3,47 @@ import Books from "../../../Model/Books";
 import { SpinnerLoading } from "../../Utils/SpinnerLoading";
 import { useFetch } from "../../../hook/useFetch";
 import { ReturnBook } from "./ReturnBook";
-//import  { datajson }   from "../../../data/data";
+import  { datajson }   from "../../../data/data";
 const url: string = "http://localhost:8080/apibook/books";
 
 export const Carousel = () => {
-    const [dataBooks, setDataBooks] = useState<Books[]>([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [httpError, setHttpError] = useState(null);
+    // const [dataBooks, setDataBooks] = useState<Books[]>([]);
+    // const [isLoading, setIsLoading] = useState(true);
+    // const [httpError, setHttpError] = useState(null);
  
-    useEffect( () => {
-        console.log("entro");
-        const fetchData = async() => {
-            const data = await fetch(url); // prima era url
-            const json = await data.json();
-            console.log(json);
-            setDataBooks(json._embedded.books);
-            setIsLoading(false);
-        } 
-        fetchData().catch((error: any) => {
+    // useEffect( () => {
+    //     console.log("entro");
+    //     const fetchData = async() => {
+    //         const data = await fetch(url); // prima era url
+    //         const json = await data.json();
+    //         console.log(json);
+    //         setDataBooks(json._embedded.books);
+    //         setIsLoading(false);
+    //     } 
+    //     fetchData().catch((error: any) => {
 
-            setHttpError(error.message);
-        })
-    },[]);
+    //         setHttpError(error.message);
+    //     })
+    // },[]);
 
     // DINAMICO 
     //const { dataBooks, isLoading, httpError } = useFetch(url);
-    if (isLoading) {
-        return (
-            <SpinnerLoading />
-        )
-    }
+    // if (isLoading) {
+    //     return (
+    //         <SpinnerLoading />
+    //     )
+    // }
 
-    if (httpError) {
-        return (
-            <div className='container m-5'>
-                <p>{httpError}</p>
-            </div>
-        )
-    }
+    // if (httpError) {
+    //     return (
+    //         <div className='container m-5'>
+    //             <p>{httpError}</p>
+    //         </div>
+    //     )
+    // }
     // FINE DINAMICO
 
-    //const {books: dataBooks} = datajson._embedded;
+    const {books: dataBooks} = datajson._embedded;
     return (
         <div className='container mt-5' style={{ height: 550 }}>
             <div className='homepage-carousel-title'>
