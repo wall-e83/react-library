@@ -35,7 +35,7 @@ function App() {
           <Route path="/search">
             <SearchBooksPage />
           </Route>
-          <Route path='/login' render={() => <LoginWidget config={oktaConfig} />}/>
+          <Route path='/login' component={() => <LoginWidget config={oktaConfig} />}/>
           <Route path='/login/callback' component={LoginCallback} />
         </Switch>       
         <Footer />
